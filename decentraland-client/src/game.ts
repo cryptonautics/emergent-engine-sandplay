@@ -2,7 +2,7 @@ import { getProvider } from "@decentraland/web3-provider"
 import { getUserAccount } from "@decentraland/EthereumController"
 import { RequestManager, ContractFactory } from "eth-connect"
 
-import abi from '../contracts/mana'
+import abi from '../contracts/emergent-engine-sandbox-abi'
 
 
 
@@ -40,8 +40,8 @@ function mutatePolygonEmergentEngineInstance() {
     try {
   
       // Define contract address constants
-      // https://mumbai.polygonscan.com/address/0xfd0a1d32683080249F7dbB00b2FFE2140404215A
-      const POLYGON_EMERGENT_ENGINE_INSTANCE_ADDRESS = "0xfd0a1d32683080249F7dbB00b2FFE2140404215A"
+      // https://mumbai.polygonscan.com/address/0x852bE5ED9a9678260301ba022C36E4d847e3e34d#code
+      const POLYGON_EMERGENT_ENGINE_SANDPLAY_INSTANCE_ADDRESS = "0x852bE5ED9a9678260301ba022C36E4d847e3e34d"
   
       // Setup steps explained in the section above
       //
@@ -54,16 +54,16 @@ function mutatePolygonEmergentEngineInstance() {
       const requestManager = new RequestManager(provider)
       const factory = new ContractFactory(requestManager, abi)
       const contract = (await factory.at(
-        POLYGON_EMERGENT_ENGINE_INSTANCE_ADDRESS
+        POLYGON_EMERGENT_ENGINE_SANDPLAY_INSTANCE_ADDRESS
       )) as any
       const playerAddress = await getUserAccount()
       log("Player address (playerAddress): ", playerAddress)
   
       // Perform a function from the contract
-      const res = await contract.setPosinaughtUsingCryptonautDelta(
-        // _cryptonaut (address) parameter
-        playerAddress,
-        // _newPosinaut (uint) parameter
+      const res = await contract.setPosinaught(
+        // Parameter: uint256 _copyIndex
+        0,
+        // Parameter: uint256 _newPosinaut
         84,
         // transaction-specific metadata
         {
@@ -272,8 +272,8 @@ class ContractStateRenderSystem {
       try {
     
         // Define contract address constants
-        // https://mumbai.polygonscan.com/address/0xfd0a1d32683080249F7dbB00b2FFE2140404215A
-        const POLYGON_EMERGENT_ENGINE_INSTANCE_ADDRESS = "0xfd0a1d32683080249F7dbB00b2FFE2140404215A"
+        // https://mumbai.polygonscan.com/address/0x852bE5ED9a9678260301ba022C36E4d847e3e34d#code
+        const POLYGON_EMERGENT_ENGINE_SANDPLAY_INSTANCE_ADDRESS = "0x852bE5ED9a9678260301ba022C36E4d847e3e34d"
     
         // Setup steps explained in the section above
         //
@@ -286,15 +286,17 @@ class ContractStateRenderSystem {
         const requestManager = new RequestManager(provider)
         const factory = new ContractFactory(requestManager, abi)
         const contract = (await factory.at(
-          POLYGON_EMERGENT_ENGINE_INSTANCE_ADDRESS
+          POLYGON_EMERGENT_ENGINE_SANDPLAY_INSTANCE_ADDRESS
         )) as any
         const playerAddress = await getUserAccount()
         log("Player address (playerAddress): ", playerAddress)
-    
+
+        const COPY_INDEX = 0
+
         // Perform a function from the contract
-        const res = await contract.getPosinaughtUsingCryptonautDelta(
-          // _cryptonaut (address) parameter
-          playerAddress,
+        const res = await contract.getPosinaught(
+          // Parameter: uint256 _copyIndex
+          COPY_INDEX,
           // transaction-specific metadata
           {
             // address originating the transaction
