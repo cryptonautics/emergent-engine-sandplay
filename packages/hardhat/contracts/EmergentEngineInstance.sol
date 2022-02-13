@@ -35,13 +35,6 @@ contract EmergentEngineInstance is Ownable, Pausable {
   //
   // ** ** **
 
-  // <3 <3 <3
-  //
-  // Inspiration synthesized from the community of cryptonauts coalescing at the ETHGlobal Road to
-  // Web3 Hackathon powered by Polygon in February 2022
-  //
-  // <3 <3 <3
-
   //
   // Event specifications
   //
